@@ -1,18 +1,17 @@
-const {StatusCodes} = require('http-status-codes')
+const { StatusCodes } = require('http-status-codes');
 
-class ValidationError extends Error{
-    constructor(error){
+class ServiceError extends Error {
+    constructor(
+        message = 'Something Went Wrong', 
+        explanation = 'Service layer error', 
+        statusCode = StatusCodes.INTERNAL_SERVER_ERROR
+    ) {
         super();
-        let explanation=[];
-        error.errors.forEach((err)=>{
-            explanation.push(err.message)
-        });
-
-        this.name='ValidationError';
-        this.message='Not able to validate the data sent in the request';
-        this.explanation=explanation;
-        this.statusCode=StatusCodes.BAD_REQUEST
+        this.name = 'ServiceError';
+        this.message = message;
+        this.explanation = explanation;
+        this.statusCode = statusCode;
     }
 }
 
-module.exports=ValidationError
+module.exports = ServiceError;
