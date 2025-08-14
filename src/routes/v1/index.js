@@ -1,9 +1,13 @@
 const express = require('express');
+const router = express.Router();
 
-const {BookingController} = require('../../controllers/index')
+const { BookingController } = require('../../controllers/index');
 
-const router=express.Router();
+// Create an instance of the BookingController class
+const bookingController = new BookingController();
 
-router.post('/bookings',BookingController.create)
+// Pass the 'create' method of the instance as the route handler
+router.post('/bookings', bookingController.create);
+router.post('/publish',bookingController.sendMessageToQueue)
 
-module.exports=router;
+module.exports = router;
