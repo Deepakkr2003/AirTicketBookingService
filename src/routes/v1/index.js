@@ -6,7 +6,9 @@ const { BookingController } = require('../../controllers/index');
 // Create an instance of the BookingController class
 const bookingController = new BookingController();
 
-// Pass the 'create' method of the instance as the route handler
+router.get('/info',(req,res)=>{
+    return res.json({message:'Response from routes'})
+})
 router.post('/bookings', bookingController.create);
 router.post('/publish',bookingController.sendMessageToQueue)
 
